@@ -1,16 +1,15 @@
 <script lang="ts" setup>
-  import { ref, onMounted } from 'vue'
+  import MusicDetail from '@/components/detail/MusicDetail.vue';
+  import { ref, onMounted, watch } from 'vue'
   import { mainStore } from '@/store/mian'
-  import { storeToRefs } from 'pinia';
-import { watch } from 'fs';
+  import { storeToRefs } from 'pinia'
   const store = mainStore()
   //解构（响应式）
-  const { playList, playListIndex, isBtnShow } = storeToRefs(store)
+  const { playList, playListIndex, isBtnShow, isDetailShow } = storeToRefs(store)
   const audio = ref<any>(null)
-  const num = ref(0)
   onMounted(() => {
     // console.log(audio)
-    console.log(playListIndex)
+    // console.log(playListIndex)
   })
   const play = () => {
     console.log(111)
@@ -22,21 +21,31 @@ import { watch } from 'fs';
       isBtnShow.value = true
     }
   }
-  // watch(playListIndex,() => {
+  watch([playListIndex,playList],() => { //监听下标，如果下标发生改变，则自动播放音乐
+    audio.value.autoplay = true
+    if(audio.value.paused) {
+      isBtnShow.value = false
+    }
+  },{
+    deep: true
+  })
 
-  // },{
-  //   deep: true
-  // })
+  const showDetail = () => {
+    isDetailShow.value = true
+  }
 </script>
 
 <template>
   <div class="footer-music">
-    <div class="f-left">
+    <div class="f-left" @click="showDetail">
       <img :src="playList[playListIndex].al.picUrl" alt="">
       <div>
-        <p class="name">{{playList[playListIndex].name}}</p>
+        <Vue3Marquee><p class="name">{{playList[playListIndex].name}}</p></Vue3Marquee>
         <p class="toggle">横划可以切换上下首</p>
       </div>
+      <van-popup v-model:show="isDetailShow" position="right" :style="{ height: '100%', width: '100%' }">
+        <MusicDetail/>
+      </van-popup>
     </div>
     <div class="f-right">
       <svg class="icon" aria-hidden="true" @click="play" v-if="isBtnShow">
@@ -66,6 +75,7 @@ import { watch } from 'fs';
   justify-content: space-between;
   align-items: center;
   .f-left {
+    width: 70%;
     display: flex;
     align-items: center;
     img {
