@@ -15,3 +15,11 @@ export function getSongList(id: string) {
     url: `/playlist/track/all?id=${id}&limit=20&offset=0`
   })
 }
+
+//获取歌曲歌词
+export function getMusicLyrics(id: any) {
+  return service({
+    method: 'GET',
+    url: `/lyric?id=${id}`
+  })
+}

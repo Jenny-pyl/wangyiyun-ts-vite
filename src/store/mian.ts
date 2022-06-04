@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { getMusicLyrics } from "@/network/api/item";
 
 export const mainStore = defineStore('main', {
   state: () => {
@@ -17,8 +18,16 @@ export const mainStore = defineStore('main', {
       playListIndex: 0,
       isBtnShow: true, //暂停按钮的显示
       isDetailShow: false, //弹出框的显示
+      lyricList: "", // 保存歌词字符串
+      currentTime: 0,//歌曲播放当前时间
     }
   },
   getters: {},
-  actions: {}
+  actions: {
+    getLyric: async (value:any) => {
+      let res = await getMusicLyrics(value)
+      // console.log(res)
+      return res.data.lrc.lyric
+    }
+  }
 })
