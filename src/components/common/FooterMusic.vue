@@ -12,21 +12,24 @@ const curSong = computed(() => {
 })
 
 //获取audio元素，play()实现控制音乐的播放与暂停
-const audio = ref<any>(null)
+const audio = ref<HTMLAudioElement | null>(null)
+// const tmp = document.createElement("audio")
 const play = () => {
-  if (audio.value.paused) {
-    audio.value.play()
+  if (audio.value?.paused) {
+    audio.value?.play()
     isBtnShow.value = false
   } else {
-    audio.value.pause()
+    audio.value?.pause()
     isBtnShow.value = true
   }
 }
 
 //监听下标与歌单，如果下标或歌单发生改变，则自动播放音乐
 watch([playListIndex, playList], () => { 
-  audio.value.autoplay = true
-  if (audio.value.paused) {
+  if(audio.value) {
+    audio.value.autoplay = true
+  }
+  if (audio.value?.paused) {
     isBtnShow.value = false
   }
 }, {
@@ -49,12 +52,9 @@ onMounted(async() => {
 
 //实时监听歌曲播放的时间并把时间传给pinia的currentTime
 const updateCurrentTime = () => {
-  currentTime.value = audio.value.currentTime
+  currentTime.value = audio.value!.currentTime
 }
 
-watch(currentTime,(newVal) => {
-  console.log(newVal)
-})
 </script>
 
 <template>
@@ -69,15 +69,9 @@ watch(currentTime,(newVal) => {
       </div>
     </div>
     <div class="f-right">
-      <svg class="icon" @click="play" v-if="isBtnShow">
-        <use xlink:href="#icon-bofang"></use>
-      </svg>
-      <svg class="icon" @click="play" v-else>
-        <use xlink:href="#icon-zanting"></use>
-      </svg>
-      <svg class="icon">
-        <use xlink:href="#icon-zu" ></use>
-      </svg>
+      <i class="iconfont icon-bofang" @click="play" v-if="isBtnShow"></i>
+      <i class="iconfont icon-zanting" @click="play" v-else></i>
+      <i class="iconfont icon-zu"></i>
     </div>
     <audio ref="audio" @timeupdate="updateCurrentTime" :src="`http://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
     <van-popup v-model:show="isDetailShow" position="right" :style="{ height: '100%', width: '100%' }">
@@ -87,6 +81,9 @@ watch(currentTime,(newVal) => {
 </template>
 
 <style lang="less" scoped>
+.iconfont {
+  font-size: 0.6rem;
+}
 .footer-music {
   width: 100%;
   height: 1.4rem;

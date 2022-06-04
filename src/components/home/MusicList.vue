@@ -30,9 +30,7 @@ onMounted(async () => {
             <div class="container">
               <img :src="item.picUrl" alt="">
               <div class="count">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-bofang"></use>
-                </svg>
+                <i class="iconfont icon-bofang"></i>
                 <span>{{ handleBigNum(item.playCount) }}</span>
               </div>
               <span class="name">{{ item.name }}</span>
@@ -91,11 +89,9 @@ onMounted(async () => {
           top: .1rem;
           right: .1rem;
 
-          .icon {
+          .iconfont {
             position: relative;
-            top: .1rem;
             left: -.1rem;
-            fill: #ccc;
           }
         }
 

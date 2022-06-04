@@ -4,33 +4,41 @@
 <template>
   <div class="icon-list">
     <div class="icon-item">
-      <svg class="icon" aria-hidden="true">
+      <i class="iconfont icon-tuijian"></i>
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-tuijian"></use>
-      </svg>
+      </svg> -->
       <span>每日推荐</span>
     </div>
     <div class="icon-item">
-      <svg class="icon" aria-hidden="true">
+      <i class="iconfont icon-shouyinji"></i>
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shouyinji"></use>
-      </svg>
+      </svg> -->
       <span>私人FM</span>
     </div>
     <div class="icon-item">
-      <svg class="icon" aria-hidden="true">
+      <i class="iconfont icon-gedan"></i>
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-gedan"></use>
-      </svg>
+      </svg> -->
       <span>歌单</span>
     </div>
     <div class="icon-item">
-      <svg class="icon" aria-hidden="true">
+      <i class="iconfont icon-paihangbang"></i>
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-paihangbang"></use>
-      </svg>
+      </svg> -->
       <span>排行榜</span>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
+.iconfont {
+  font-size: 1rem;
+  color: rgb(220, 28, 28);
+}
 .icon-list {
   width: 100%;
   height: 1.6rem;
@@ -44,10 +52,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .icon {
-      width: 1rem;
-      height: 1rem;
-    }
   }
 }
 </style>

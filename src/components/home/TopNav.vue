@@ -6,9 +6,7 @@ const isActive = ref(true)
 <template>
   <div class="top-nav">
     <div class="left">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-caidanlan"></use>
-      </svg>
+      <i class="iconfont icon-caidanlan"></i>
     </div>
     <div class="center">
       <span>我的</span>
@@ -17,14 +15,15 @@ const isActive = ref(true)
       <span>视频</span>
     </div>
     <div class="right">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-sousuo"></use>
-      </svg>
+      <i class="iconfont icon-sousuo"></i>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
+.iconfont {
+  font-size: .6rem;
+}
 .top-nav {
   width: 100%;
   height: 1rem;

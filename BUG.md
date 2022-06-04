@@ -34,3 +34,24 @@ onMounted(async() => {
   lyricList.value = await store.getLyric(curSong.value.id)
 })
 ```
+4、
+MusicDetail中：
+```js
+watch(playListIndex, () => {
+    musicLyric && (musicLyric.value.scrollTop = 0)
+})
+```
+**想要实现的效果**：实现切换上下首后歌词容器musicLyric的scrollTop也改变。
+**结果**：不可行。
+**分析**：watch函数（回调函数是同步操作的）在playListIndex改变后立即执行，此时浏览器并未完成渲染，则&&前musicLyric未完拿到数据，于是&&后面的(musicLyric.value.scrollTop = 0)不执行，且由于在当前playListIndex改变后只执行一次，就算过一段时间musicLyric渲染完成，&&后面语句也不执行。
+**总结**：watch监听playListIndex改变发生在musicLyric拿到数据前。
+**思路**：把回调函数封装为异步操作，使得watch整体异步。
+代码改为：
+```js
+watch(playListIndex, () => {
+  setTimeout(() => {
+    // musicLyric && (musicLyric.value.scrollTop = 0)
+    musicLyric.value.scrollTop = 0
+  },20)
+})
+```

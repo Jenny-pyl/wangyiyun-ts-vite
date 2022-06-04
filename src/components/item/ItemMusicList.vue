@@ -22,15 +22,11 @@ const playMusic = (index:any) => {
   <div class="item-music-list">
     <div class="list-header">
       <div class="h-left">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bofang"></use>
-        </svg>
+        <i class="iconfont icon-bofang"></i>
         <p>播放全部<span>(共20首)</span></p>
       </div>
       <div class="h-right">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-jiahao"></use>
-        </svg>
+        <i class="iconfont icon-jiahao"></i>
         <span>收藏({{ subscribedCount }})</span>
       </div>
     </div>
@@ -47,18 +43,17 @@ const playMusic = (index:any) => {
         </div>
       </div>
       <div class="c-right">
-        <svg class="icon" aria-hidden="true" v-show="item.mv != 0">
-          <use xlink:href="#icon-shipin"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-caidanlan"></use>
-        </svg>
+        <i class="iconfont icon-shipin" v-show="item.mv != 0"></i>
+        <i class="iconfont icon-caidanlan"></i>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
+.iconfont {
+  font-size: .5rem;
+}
 .item-music-list {
   width: 100%;
   // height: 7.84rem;
@@ -95,10 +90,8 @@ const playMusic = (index:any) => {
       align-items: center;
       color: #fff;
 
-      .icon {
-        width: .36rem;
-        margin-right: .1rem;
-        fill: #fff;
+      .iconfont {
+       font-size: 0.28rem;
       }
     }
   }
@@ -148,8 +141,7 @@ const playMusic = (index:any) => {
       display: flex;
       justify-content: flex-end;
 
-      .icon {
-        fill: #ccc;
+      .iconfont {
         margin-left: .21rem
       }
     }

@@ -17,27 +17,31 @@ function goBack(): void {
   <div class="item-music-top">
     <div class="top">
       <div class="t-left">
-        <svg class="icon" aria-hidden="true" @click="goBack">
+        <i class="iconfont icon-zuojiantou" @click="goBack"></i>
+        <!-- <svg class="icon" aria-hidden="true" @click="goBack">
           <use xlink:href="#icon-zuojiantou"></use>
-        </svg>
+        </svg> -->
         <span class="song-list">歌单</span>
       </div>
       <div class="t-right">
-        <svg class="icon" aria-hidden="true">
+        <i class="iconfont icon-sousuo"></i>
+        <i class="iconfont icon-caidanlan"></i>
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-sousuo"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true">
+        </svg> -->
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-caidanlan"></use>
-        </svg>
+        </svg> -->
       </div>
     </div>
     <div class="center">
       <div class="c-left">
         <img :src="playList.coverImgUrl" alt="">
         <div class="play-count">
-          <svg class="icon" aria-hidden="true">
+          <i class="iconfont icon-bofang"></i>
+          <!-- <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-bofang"></use>
-          </svg>
+          </svg> -->
           <span>{{ handleBigNum(playList.playCount) }}</span>
         </div>
       </div>
@@ -46,36 +50,41 @@ function goBack(): void {
         <div class="creator">
           <img :src="playList.creator?.avatarUrl" alt="">
           <span>{{ playList.creator?.nickname }}</span>
-          <svg class="icon" aria-hidden="true">
+          <i class="iconfont icon-youjiantou"></i>
+          <!-- <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-youjiantou"></use>
-          </svg>
+          </svg> -->
         </div>
         <div class="description">{{ playList.description }}</div>
       </div>
     </div>
     <div class="bottom">
       <div class="b-item">
-        <svg class="icon" aria-hidden="true">
+        <i class="iconfont icon-31xiaoxi"></i>
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-31xiaoxi"></use>
-        </svg>
+        </svg> -->
         <span>{{ playList.commentCount }}</span>
       </div>
       <div class="b-item">
-        <svg class="icon" aria-hidden="true">
+        <i class="iconfont icon-fenxiang"></i>
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fenxiang"></use>
-        </svg>
+        </svg> -->
         <span>{{ playList.shareCount }}</span>
       </div>
       <div class="b-item">
-        <svg class="icon" aria-hidden="true">
+        <i class="iconfont icon-xiazai-wenjianxiazai-16"></i>
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xiazai-wenjianxiazai-16"></use>
-        </svg>
+        </svg> -->
         <span>下载</span>
       </div>
       <div class="b-item">
-        <svg class="icon" aria-hidden="true">
+        <i class="iconfont icon-show_duoxuan"></i>
+        <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-show_duoxuan"></use>
-        </svg>
+        </svg> -->
         <span>多选</span>
       </div>
     </div>
@@ -83,6 +92,9 @@ function goBack(): void {
 </template>
 
 <style lang="less" scoped>
+.iconfont {
+  font-size: .5rem;
+}
 .bg-img {
   position: absolute;
   z-index: -1;
@@ -97,10 +109,6 @@ function goBack(): void {
   padding: 0 0.2rem;
   display: flex;
   flex-direction: column;
-
-  .icon {
-    fill: #f6f1f1;
-  }
 
   .top {
     width: 100%;
@@ -146,7 +154,7 @@ function goBack(): void {
         position: absolute;
         top: .1rem;
         right: .3rem;
-        .icon {
+        .iconfont {
           position: relative;
           top: .1rem;
           left: -.1rem;
@@ -173,11 +181,8 @@ function goBack(): void {
           margin-right: .2rem;
         }
 
-        .icon {
-          fill: #585353;
-          width: .25rem;
-          position: relative;
-          top: 0.02rem;
+        .iconfont {
+          font-size: .28rem;
         }
       }
 

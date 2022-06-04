@@ -3,13 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-.icon {
-  width: 0.5rem;
-  height: 0.5rem;
-  /* vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden; */
-}
 a {
   color: #000;
+}
+.iconfont {
+  font-size: 0.6rem;
 }

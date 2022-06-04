@@ -5,6 +5,7 @@ import store from './store/index'
 import Vue3Marquee from 'vue3-marquee'
 import 'vue3-marquee/dist/style.css'
 import '@/utils/rem'
+import "@/assets/css/base.css"
 import { getVant } from './plugins'
 
 

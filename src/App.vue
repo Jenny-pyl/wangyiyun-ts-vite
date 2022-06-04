@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import "@/assets/css/base.css"
 import FooterMusic from "./components/common/FooterMusic.vue"
 </script>
 
@@ -13,4 +12,5 @@ import FooterMusic from "./components/common/FooterMusic.vue"
 </template>
 
 <style scoped>
+
 </style>
