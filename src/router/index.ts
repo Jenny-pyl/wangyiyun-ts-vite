@@ -12,6 +12,11 @@ const router = createRouter({
       path: '/itemMusic',
       name: 'itemMusic',
       component: () => import('@/views/ItemMusic.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/Search.vue')
     }
   ]
 })

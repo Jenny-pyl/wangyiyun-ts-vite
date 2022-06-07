@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 const isActive = ref(true)
+const router = useRouter()
+
+const search = () => {
+  router.push('/search')
+}
 </script>
 
 <template>
@@ -15,7 +21,7 @@ const isActive = ref(true)
       <span>视频</span>
     </div>
     <div class="right">
-      <i class="iconfont icon-sousuo"></i>
+      <i class="iconfont icon-sousuo" @click="search"></i>
     </div>
   </div>
 </template>

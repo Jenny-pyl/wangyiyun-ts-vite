@@ -20,6 +20,7 @@ export const mainStore = defineStore('main', {
       isDetailShow: false, //弹出框的显示
       lyricList: "", // 保存歌词字符串
       currentTime: 0,//歌曲播放当前时间
+      totalSongTime: 0, //歌曲总时间
     }
   },
   getters: {},

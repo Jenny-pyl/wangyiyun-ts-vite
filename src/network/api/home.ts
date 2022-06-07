@@ -15,3 +15,11 @@ export function getMusicList() {
     url: '/personalized?limit=10'
   })
 }
+
+//搜素获取歌手歌曲
+export function getSearchMusic(data:any) {
+  return service({
+    method: 'GET',
+    url: `/search?keywords=${data}`
+  })
+}

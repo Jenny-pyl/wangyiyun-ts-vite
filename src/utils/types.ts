@@ -21,11 +21,15 @@ export interface IAl {
 export interface IAr {
   id: number
   name: string
+  img1v1Url: string
 }
 export interface ISongs {
   id: number
   name: string
   al: IAl
   ar: Array<IAr>
+  artists: Array<IAr>
   mv: number
+  mvid: number
+  album: any
 }

@@ -7,8 +7,11 @@ const props = defineProps<{
   playList: IPlayList
 }>()
 const router = useRouter()
-function goBack(): void {
+const goBack = () => {
   router.push({ path: '/' })
+}
+const goSearch = () => {
+  router.push('/search')
 }
 </script>
 
@@ -24,7 +27,7 @@ function goBack(): void {
         <span class="song-list">歌单</span>
       </div>
       <div class="t-right">
-        <i class="iconfont icon-sousuo"></i>
+        <i class="iconfont icon-sousuo" @click="goSearch"></i>
         <i class="iconfont icon-caidanlan"></i>
         <!-- <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-sousuo"></use>

@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 
 const store = mainStore()
 //解构（响应式）
-const { playList, playListIndex, isBtnShow, isDetailShow, lyricList, currentTime } = storeToRefs(store)
+const { playList, playListIndex, isBtnShow, isDetailShow, lyricList, currentTime, totalSongTime } = storeToRefs(store)
 const curSong = computed(() => {
   return playList.value[playListIndex.value]
 })
@@ -32,8 +32,6 @@ watch([playListIndex, playList], () => {
   if (audio.value?.paused) {
     isBtnShow.value = false
   }
-}, {
-  deep: true
 })
 
 //点击展现组件MusicDetail
@@ -55,6 +53,25 @@ const updateCurrentTime = () => {
   currentTime.value = audio.value!.currentTime
 }
 
+//监听当前歌曲是否播放完，若播放完则自动跳到下一首
+watch(currentTime, () => {
+  if(currentTime.value === totalSongTime.value) {
+    if(playListIndex.value === playList.value.length - 1){
+      playListIndex.value = 0
+    }else {
+      playListIndex.value = playListIndex.value + 1
+    }
+  }
+})
+
+const updateSongTotalTime = () => {
+  totalSongTime.value = audio.value!.duration
+}
+
+const canPlaySong = () => {
+  updateSongTotalTime()
+}
+
 </script>
 
 <template>
@@ -73,7 +90,10 @@ const updateCurrentTime = () => {
       <i class="iconfont icon-zanting" @click="play" v-else></i>
       <i class="iconfont icon-zu"></i>
     </div>
-    <audio ref="audio" @timeupdate="updateCurrentTime" :src="`http://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
+    <audio ref="audio" 
+          @timeupdate="updateCurrentTime" 
+          :src="`http://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"
+          @canplay="canPlaySong"></audio>
     <van-popup v-model:show="isDetailShow" position="right" :style="{ height: '100%', width: '100%' }">
       <MusicDetail :play="play"/>
     </van-popup>
@@ -102,7 +122,8 @@ const updateCurrentTime = () => {
     align-items: center;
 
     img {
-      width: 55px;
+      width: 1.1rem;
+      height: 1.1rem;
       border-radius: 50%;
       margin-right: .2rem;
     }

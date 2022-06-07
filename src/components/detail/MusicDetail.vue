@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { mainStore } from '@/store/mian'
 import { storeToRefs } from 'pinia'
-import { ref, watch, computed, onMounted, nextTick } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 
 const props = defineProps<{
   play: Function
 }>()
 
 const store = mainStore()
-const { playList, playListIndex, isDetailShow, isBtnShow, lyricList, currentTime } = storeToRefs(store)
+const { playList, playListIndex, isDetailShow, isBtnShow, lyricList, currentTime, totalSongTime } = storeToRefs(store)
 
 const curSong = computed(() => {
   return playList.value[playListIndex.value]
@@ -44,6 +44,7 @@ const lyricArr = computed(() => {
         let time = parseInt(min) * 60 + parseInt(sec) + parseFloat(mill) / 1000
         return { min, sec, mill, lrc, time }
       })
+      //把数组最后一项（空）过滤掉
       .filter((_, index, arr) => index !== arr.length - 1)
       // .map((item, index, arr) => index === arr.length - 1 ? {...item,next:10000000} : {...item,next:arr[index + 1].time})
       .map((item, index, arr) => ({...item,next:index === arr.length - 1?1000000 : arr[index + 1].time}))
@@ -62,9 +63,9 @@ watch(currentTime, () => {
   }
 })
 
-//点击磁盘里的图片显示歌词
-const showLyric = () => {
-  isLyricShow.value = true
+//控制歌词是否显示
+const showLyric = (value: boolean) => {
+  isLyricShow.value = value
 }
 
 //歌曲上下首切换
@@ -82,6 +83,7 @@ const nextSong = () => {
     playListIndex.value = playListIndex.value + 1
   }
 }
+
 //切换上下首后歌词容器musicLyric的scrollTop也需要改变
 watch(playListIndex, () => {
   setTimeout(() => {
@@ -112,7 +114,7 @@ watch(playListIndex, () => {
       </div>
     </div>
 
-    <div ref="musicLyric" class="lyric" v-if="isLyricShow">
+    <div ref="musicLyric" class="lyric" v-if="isLyricShow" @click="showLyric(false)">
       <p v-for="item in lyricArr" :key="item" :class="{ active: (currentTime >= item.time && currentTime < item.next) }">
         {{ item.lrc }}
       </p>
@@ -121,7 +123,7 @@ watch(playListIndex, () => {
       <img src="@/assets/imgs/needle-plus.png" class="img_needle" :class="{ img_needle_active: !isBtnShow }">
       <img src="@/assets/imgs/disc-plus.png" class="img_cd">
       <img :src="curSong.al.picUrl" alt="" class="img_ar" :class="{ img_ar_active: !isBtnShow, img_ar_paused: isBtnShow }"
-        @click="showLyric">
+        @click="showLyric(true)">
     </div>
 
 
@@ -133,7 +135,9 @@ watch(playListIndex, () => {
         <i class="iconfont icon-31xiaoxi"></i>
         <i class="iconfont icon-liebiao-"></i>
       </div>
-      <div class="b-mid"></div>
+      <div class="b-mid">
+        <input type="range" class="range" min="0" :max="totalSongTime" v-model="currentTime" step="0.05">
+      </div>
       <div class="b-bottom">
         <i class="iconfont icon-24gl-repeat2"></i>
         <i class="iconfont icon-shangyishou" @click="preSong"></i>
@@ -212,7 +216,7 @@ watch(playListIndex, () => {
     flex-direction: column;
     align-items: center;
     overflow: scroll;
-    margin-top: .2rem;
+    padding-top: .2rem;
 
     p {
       color: rgb(230, 219, 219);
@@ -266,7 +270,7 @@ watch(playListIndex, () => {
 
     .img_ar {
       width: 3.2rem;
-      height: 3, 2rem;
+      height: 3.2rem;
       border-radius: 50%;
       position: absolute;
       bottom: 3.14rem;
@@ -307,7 +311,13 @@ watch(playListIndex, () => {
       justify-content: space-around;
     }
 
-    .b-mid {}
+    .b-mid {
+      width: 100%;
+      .range {
+        width: 100%;
+        height: 0.4rem;
+      }
+    }
 
     .b-bottom {
       padding: 0 .1rem;

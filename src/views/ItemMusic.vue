@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
+import { useRoute} from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { getMusicItemList, getSongList } from '@/network/api/item'
 
@@ -19,7 +19,7 @@ onMounted(async() => {
   // console.log(playList)
   //获取歌单歌曲
   const result = await getSongList(id.value)
-  // console.log(result)
+  console.log(result)
   songs.value = result.data.songs
   //防止页面刷新，数据丢失，将数据保存到sessionStorage
   sessionStorage.setItem('itemDetail', JSON.stringify(playList.value))
