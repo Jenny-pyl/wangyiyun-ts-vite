@@ -1,16 +1,33 @@
 <script lang="ts" setup>
-import { mainStore } from '@/store/mian';
+import { mainStore } from '@/store/mian'
 import { ref } from 'vue'
-import { getPhoneLogin } from "@/network/api/home"
-import console from 'console';
+import { getPhoneLogin, getUserInfo } from "@/network/api/home"
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
+const router = useRouter()
 const store = mainStore()
-const phone = ref<number>()
-const password = ref<number>()
+const { isLogin, token, user } = storeToRefs(store)
+const phone = ref<string>()
+const password = ref<string>()
 const login = async() => {
-  const res = await getPhoneLogin({phone, password})
+  const res = await getPhoneLogin({phone:phone.value, password:password.value})
   console.log(res)
-  // console.log(phone, password)
+  if(res.data.code === 200) {
+    token.value = res.data.token
+    localStorage.setItem("token",JSON.stringify(res.data.token))
+
+    let result = await getUserInfo(res.data.account.id)
+    console.log(result)
+    user.value = result.data.profile
+    localStorage.setItem("user",JSON.stringify(result.data.profile))
+
+    router.push('/userInfo')
+    isLogin.value = true
+  }else {
+    alert("手机号或者密码错误")
+    password.value = ""
+  }
 }
 </script>
 

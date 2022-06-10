@@ -2,13 +2,9 @@
 import { ref, onMounted } from 'vue'
 import { getMusicList } from '@/network/api/home'
 import { handleBigNum } from '@/utils/publicTools'
+import { IMusicList } from '@/utils/types'
 
-interface IMusicList {
-  id: number,
-  name: string,
-  picUrl: string,
-  playCount: number,
-}
+
 const musicList = ref<IMusicList[]>([])
 onMounted(async () => {
   let res = await getMusicList()

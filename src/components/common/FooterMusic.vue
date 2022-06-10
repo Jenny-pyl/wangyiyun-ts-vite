@@ -118,6 +118,7 @@ const canPlaySong = () => {
 
   .f-left {
     width: 70%;
+    max-width: 5rem;
     display: flex;
     align-items: center;
 

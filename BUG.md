@@ -55,3 +55,20 @@ watch(playListIndex, () => {
   },20)
 })
 ```
+4、在router的配置文件index.ts中使用pinia中的数据,与在普通组件中使用方法一样：
+```js
+import { mainStore } from "@/store/mian"
+import { storeToRefs } from "pinia"
+const store = mainStore()
+const { isLogin, isFooterShow }  = storeToRefs(store)
+```
+报错，原因不详（to-do)
+代码改为：
+```js
+import pinia from "@/store/index"
+import { mainStore } from "@/store/mian"
+import { storeToRefs } from "pinia"
+const store = mainStore(pinia)
+const { isLogin, isFooterShow }  = storeToRefs(store)
+```
+不报错

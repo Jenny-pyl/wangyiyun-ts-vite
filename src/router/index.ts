@@ -3,7 +3,7 @@ import pinia from "@/store/index"
 import { mainStore } from "@/store/mian"
 import { storeToRefs } from "pinia"
 const store = mainStore(pinia)
-const { isLogin, isFooterShow }  = storeToRefs(store)
+const { isLogin, isFooterShow, token }  = storeToRefs(store)
 
 const router = createRouter({
   history: createWebHistory(),
@@ -33,7 +33,7 @@ const router = createRouter({
       name: 'userInfo',
       //进入InfoUser组件前先判断有没有登录
       beforeEnter:(to,from,next) => {
-        if(isLogin.value) {
+        if(isLogin.value || token.value || localStorage.getItem("token")) {
           next()
         }else {
           next('/login')

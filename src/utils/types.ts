@@ -1,3 +1,10 @@
+export interface IMusicList {
+  id: number,
+  name: string,
+  picUrl: string,
+  playCount: number,
+}
+
 export interface ICreator {
   avatarUrl: string
   nickname: string
@@ -32,4 +39,14 @@ export interface ISongs {
   mv: number
   mvid: number
   album: any
+}
+
+export interface IUserInfo {
+  backgroundUrl: string
+  avatarUrl: string
+  nickname: string
+  follows: number
+  followeds: number
+  gender: 1 | 2
+  signature: string
 }
