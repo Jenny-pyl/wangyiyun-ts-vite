@@ -7,6 +7,10 @@ const router = useRouter()
 const search = () => {
   router.push('/search')
 }
+
+const clickToUserInfo = () => {
+  router.push('/userInfo')
+}
 </script>
 
 <template>
@@ -15,7 +19,7 @@ const search = () => {
       <i class="iconfont icon-caidanlan"></i>
     </div>
     <div class="center">
-      <span>我的</span>
+      <span @click="clickToUserInfo">我的</span>
       <span :class="{ active: isActive }">发现</span>
       <span>云村</span>
       <span>视频</span>

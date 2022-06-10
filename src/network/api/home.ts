@@ -23,3 +23,19 @@ export function getSearchMusic(data:any) {
     url: `/search?keywords=${data}`
   })
 }
+
+//登录/login/cellphone?phone=xxx&password=yyy
+export function getPhoneLogin(data:any) {
+  return service({
+    method: 'GET',
+    url: `/login/cellphone?phone=${data.phone}&password=${data.password}`
+  })
+}
+
+//获取用户详情/user/detail?uid=32953014
+export function getUserInfo(data:any) {
+  return service({
+    method: 'GET',
+    url: `/user/detail?uid=${data}`
+  })
+}

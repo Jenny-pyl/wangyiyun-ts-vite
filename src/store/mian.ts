@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { getMusicLyrics } from "@/network/api/item";
+import { getPhoneLogin } from "@/network/api/home"
 
 export const mainStore = defineStore('main', {
   state: () => {
@@ -21,6 +22,8 @@ export const mainStore = defineStore('main', {
       lyricList: "", // 保存歌词字符串
       currentTime: 0,//歌曲播放当前时间
       totalSongTime: 0, //歌曲总时间
+      isLogin: false, //判断是否登录
+      isFooterShow: true, //底部组件是否显示
     }
   },
   getters: {},
@@ -29,6 +32,11 @@ export const mainStore = defineStore('main', {
       let res = await getMusicLyrics(value)
       // console.log(res)
       return res.data.lrc.lyric
-    }
+    },
+    getLogin: async (value: any) => {
+      console.log(value)
+      let res = await getPhoneLogin(value)
+      console.log(res)
+    } 
   }
 })
